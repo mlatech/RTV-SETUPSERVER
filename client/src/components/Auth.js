@@ -30,7 +30,7 @@ export default function Auth(){
 
   return (
     <div className="auth-container">
-      <h1>Todo App</h1>
+      <h1>Rock The Vote App</h1>
       { !toggle ?
         <>
           <AuthForm 

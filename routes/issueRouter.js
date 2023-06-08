@@ -51,6 +51,22 @@ issueRouter.delete("/:IssueId", (req, res, next) => {
   )
 })
 
+//upvote an issue
+issueRouter.put("/like/:issueID", (req, res, next)=>{
+  Issue.findOneAndUpdate(
+      {_id: req.params.issueID},
+      {$inc: {likes: 1}},
+      {new: true},
+      (err, updatedIssue) => {
+          if(err){
+              res.status(500)
+              return next(err)
+          }
+          return res.status(201).send(updatedIssue)
+      }
+  )
+})
+
 // Update Issue
 issueRouter.put("/:IssueId", (req, res, next) => {
   Issue.findOneAndUpdate(

@@ -15,7 +15,7 @@ export default function UserProvider(props){
   const initState = { 
     user: JSON.parse(localStorage.getItem("user")) || {}, 
     token: localStorage.getItem("token") || "", 
-    todos: [] 
+    issues: [] 
   }
 
   const [userState, setUserState] = useState(initState)
@@ -41,7 +41,7 @@ export default function UserProvider(props){
         const { user, token } = res.data
         localStorage.setItem("token", token)
         localStorage.setItem("user", JSON.stringify(user))
-        getUserTodos()
+        getUserIssues()
         setUserState(prevUserState => ({
           ...prevUserState,
           user,
@@ -57,27 +57,27 @@ export default function UserProvider(props){
     setUserState({
       user: {},
       token: "",
-      todos: []
+      issues: []
     })
   }
 
-  function getUserTodos(){
-    userAxios.get("/api/todo/user")
+  function getUserIssues(){
+    userAxios.get("/api/issue/user")
       .then(res => {
         setUserState(prevState => ({
           ...prevState,
-          todos: res.data
+          issues: res.data
         }))
       })
       .catch(err => console.log(err.response.data.errMsg))
   }
 
-  function addTodo(newTodo){
-    userAxios.post("/api/todo", newTodo)
+  function addIssue(newIssue){
+    userAxios.post("/api/issue", newIssue)
       .then(res => {
         setUserState(prevState => ({
           ...prevState,
-          todos: [...prevState.todos, res.data]
+          issues: [...prevState.issues, res.data]
         }))
       })
       .catch(err => console.log(err.response.data.errMsg))
@@ -90,7 +90,7 @@ export default function UserProvider(props){
         signup,
         login,
         logout,
-        addTodo
+        addIssue
       }}>
       { props.children }
     </UserContext.Provider>
