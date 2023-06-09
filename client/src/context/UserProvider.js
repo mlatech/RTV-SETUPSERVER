@@ -19,10 +19,10 @@ export default function UserProvider(props){
   }
 
   const [userState, setUserState] = useState(initState)
-  const initPublic = {
-    publicIssues: [],
-  }
-  const [publicIssues, setPublicIssues] = useState(initPublic)
+//   const initPublic = {
+//     publicIssues: [],
+//   }
+  const [publicIssues, setPublicIssues] = useState([])
 
   function signup(credentials){
     axios.post("/auth/signup", credentials)
@@ -101,17 +101,15 @@ export default function UserProvider(props){
       .catch(err => console.log(err.response.data.errMsg))
   }
 
-  const getPublicIssues = async ()=> {
-    try {
-        const response = await userAxios.get("/api/issue/")
-        setPublicIssues((prevPublicIssues)=>({
-            ...prevPublicIssues,
-            publicIssues: response.data
-        }))
-    }catch (err){
-        console.log(err.response.errMsg)
-    }
+ 
+  function getPublicIssues(){
+    userAxios.get("/api/issue")
+      .then(res => {
+        setPublicIssues(res.data)
+      })
+      .catch(err => console.log(err.response.data.errMsg))
   }
+  
   return (
     <UserContext.Provider
       value={{
@@ -121,7 +119,8 @@ export default function UserProvider(props){
         logout,
         addIssue,
         resetAuthErr,
-        getPublicIssues
+        getPublicIssues,
+        publicIssues
       }}>
       { props.children }
     </UserContext.Provider>

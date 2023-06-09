@@ -1,11 +1,16 @@
-import React from 'react'
-import Issue from './Issue.js'
+import React from 'react';
+import Issue from './Issue.js';
 
-export default function IssueList(props){
-  const { issues } = props
+export default function IssueList(props) {
+  const { issues } = props;
+
   return (
-    <div className="todo-list">
-      { issues.map(issue => <Issue {...issue} key={issue._id}/>) }
+    <div className="issue-list">
+      {issues.map((issue) => (
+        <div className="issue-card" key={issue._id}>
+          <Issue {...issue} />
+        </div>
+      ))}
     </div>
-  )
+  );
 }

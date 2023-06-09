@@ -1,0 +1,39 @@
+.public {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .issue-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    max-width: 1200px;
+    padding: 20px;
+  }
+  
+  /* Style for individual issue */
+  .issue {
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    word-wrap: break-word;
+  }
+  
+  .issue .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #dbdbdb;
+    padding-bottom: 8px;
+  }
+  
+  .issue .description {
+    font-size: 14px;
+    color: #888888;
+  }
