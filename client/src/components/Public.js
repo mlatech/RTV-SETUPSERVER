@@ -1,6 +1,6 @@
 import React from 'react'
-// import TodoList from './TodoList.js'
-// import Todo from './Todo.js'
+import IssueList from './IssueList.js'
+import Issue from './Issue.js'
 
 export default function Public(){
   return (
