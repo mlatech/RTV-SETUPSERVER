@@ -1,15 +1,18 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom'
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import UserProvider from './context/UserProvider.js'
-import './css/styles.css'
+import UserProvider from './context/UserProvider';
+import CommentProvider from './context/CommentProvider';
+import './css/styles.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.render(
   <BrowserRouter>
     <UserProvider>
-      <App />
+      <CommentProvider>
+        <App />
+      </CommentProvider>
     </UserProvider>
-  </BrowserRouter>
+  </BrowserRouter>,
+  document.getElementById('root')
 );

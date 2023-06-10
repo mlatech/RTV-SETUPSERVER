@@ -10,10 +10,6 @@ export default function Public() {
     getPublicIssues();
   }, []);
 
-  if (!publicIssues || !publicIssues.length) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="public">
       <div className="issue-container">

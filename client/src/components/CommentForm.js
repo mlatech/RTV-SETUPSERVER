@@ -1,27 +1,38 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+// CommentForm.js
+import React, { useState, useContext } from 'react';
+import { CommentContext } from '../context/CommentProvider';
+import { UserContext } from '../context/UserProvider';
 
-export default function CommentForm({ issueId }) {
+export default function CommentForm(props) {
+  const { addComment } = useContext(CommentContext);
+  const { user } = useContext(UserContext);
+  const { issueId } = props;
+
   const [comment, setComment] = useState('');
 
-  function addComment(newComment){
-    axios.post("/api/comment/:UserId", newComment)
-      .then(res => {
-        setComment(prevComment => ({
-          ...prevComment,
-          comment: [...prevState.comment, res.data]
-        }))
-      })
-      .catch(err => console.log(err.response.data.errMsg))
+  function handleChange(e) {
+    setComment(e.target.value);
   }
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    const newComment = { comment };
+    addComment(issueId, newComment);
+    setComment('');
+  }
 
-return(
+  return (
     <div>
-        <form>
-            
-        </form>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="comment"
+          value={comment}
+          onChange={handleChange}
+          placeholder="Comment"
+        />
+        <button>Post</button>
+      </form>
     </div>
-)
-  
+  );
 }
